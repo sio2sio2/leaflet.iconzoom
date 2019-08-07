@@ -1,0 +1,61 @@
+{
+  "name": "leaflet.iconzoom",
+  "author": "José Miguel Sánchez Alés <sio2sio2+github@gmail.com>",
+  "version": "0.1.0",
+  "main": "dist/leaflet.iconzoom.js",
+  "scripts": {
+    "build": "webpack --env.output=min",
+    "bundle": "webpack --env.output=bundle",
+    "src": "webpack --env.output=src",
+    "debug": "webpack-dev-server --env.output=debug --open"
+  },
+  "license": "MIT",
+  "keywords": [
+    "gis",
+    "map",
+    "javascript",
+    "leaflet",
+    "plugin"
+  ],
+  "browserslist": {
+    "production": [
+      "cover 95% in ES"
+    ],
+    "oneplus": [
+      "> 1% in ES"
+    ],
+    "ie10": [
+      "> .25% in ES",
+      "ie >= 10"
+    ],
+    "relax": [
+      "cover 80% in ES"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sio2sio2/leaflet.iconzoom.git"
+  },
+  "homepage": "https://github.com/sio2sio2/leaflet.iconzoom#readme",
+  "bugs": {
+    "url": "https://github.com/sio2sio2/leaflet.iconzoom/issues"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "url-loader": "^2.1.0",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2",
+    "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "core-js": "^3.1.4",
+    "leaflet": "^1.5.1"
+  }
+}
