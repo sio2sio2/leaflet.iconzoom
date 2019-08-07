@@ -15,4 +15,7 @@ ratón sobre ellos. Para lograrlo, basta con añadir a `L.Icon
       }
    });
 
+Puede consultar `un ejemplo de uso
+<https//sio2sio2.github.io/leaflet.iconzoom/examples>`_.
+
 .. _Leaflet: https://leafletjs.com
