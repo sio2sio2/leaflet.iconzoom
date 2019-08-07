@@ -8,7 +8,7 @@ module.exports = env => {
 
    switch(env.output) {
       case "min":
-      //case "debug":
+      case "debug":
          filename = "[name].js";
          break;
       case "src":

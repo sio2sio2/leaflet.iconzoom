@@ -7,7 +7,7 @@
     "build": "webpack --env.output=min",
     "bundle": "webpack --env.output=bundle",
     "src": "webpack --env.output=src",
-    "debug": "webpack-dev-server --env.output=debug --open"
+    "debug": "webpack-dev-server --env.output=debug"
   },
   "license": "MIT",
   "keywords": [
@@ -45,6 +45,7 @@
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "babel-loader": "^8.0.6",
+    "copy-webpack-plugin": "^5.0.4",
     "css-loader": "^3.2.0",
     "file-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.8.0",
