@@ -1,7 +1,8 @@
 const webpack = require("webpack"),
       merge = require("webpack-merge"),
       MiniCssExtractPlugin = require("mini-css-extract-plugin"),
-      CopyPlugin = require('copy-webpack-plugin');
+      CopyPlugin = require('copy-webpack-plugin'),
+      name = require("./package.json").name;
 
 
 // Configuración para Babel
@@ -33,7 +34,7 @@ function confBabel(env) {
 function confBundle() {
    return {
       entry: {
-         "leaflet.iconzoom": ["leaflet/dist/leaflet.css"]
+         [name]: ["leaflet/dist/leaflet.css"]
       },
       module: {
          rules: [
@@ -137,7 +138,7 @@ module.exports = env => {
    const common = {
       mode: mode,
       entry: {
-         "leaflet.iconzoom": ["./src/index.js"]
+         [name]: ["./src/index.js"]
       },
       output: {
          filename: filename

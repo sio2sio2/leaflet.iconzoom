@@ -1,7 +1,7 @@
 {
   "name": "leaflet.iconzoom",
   "author": "José Miguel Sánchez Alés <sio2sio2+github@gmail.com>",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/leaflet.iconzoom.js",
   "scripts": {
     "build": "webpack --env.output=min",
