@@ -74,8 +74,7 @@ function confNoDeps() {
       },
       output: {
          libraryTarget: "umd",
-         umdNamedDefine: true,
-         library: "Lcz"
+         umdNamedDefine: false
       }
    }
 } 
