@@ -1,7 +1,7 @@
 const webpack = require("webpack"),
       merge = require("webpack-merge"),
+      path = require("path"),
       MiniCssExtractPlugin = require("mini-css-extract-plugin"),
-      CopyPlugin = require('copy-webpack-plugin'),
       name = require("./package.json").name;
 
 
@@ -92,21 +92,16 @@ function confDev(filename) {
    }
 }
 
-
 //Configuración adicional para depuración
 //(Se requiere copiar el ejemplo en el servidor)
 function confDebug() {
    return {
       devServer: {
-         contentBase: false,
-         open: "chromium",
-         //openPage: "index.html"
-      },
-      plugins: [
-         new CopyPlugin([
-            {from: "examples", to: ".", ignore: ["*.swp"] }
-         ])
-      ]
+         contentBase: path.resolve(__dirname, "examples"),
+         publicPath: "/dist/",
+         watchContentBase: true,
+         open: "chromium"
+      }
    }
 }
 
@@ -122,10 +117,8 @@ module.exports = env => {
 
    switch(env.output) {
       case "min":
-         filename = "[name].js";
-         break;
       case "debug":
-         filename = "dist/[name].js";
+         filename = "[name].js";
          break;
       case "src":
          filename = "[name]-src.js";
