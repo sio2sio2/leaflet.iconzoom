@@ -15,7 +15,13 @@ ratón sobre ellos. Para lograrlo, basta con añadir a `L.Icon
       }
    });
 
-Puede consultar `un ejemplo de uso
+Puede consultar:
+
+* `Ejemplo de uso que también requiere cargar Leaflet
 <https://sio2sio2.github.io/leaflet.iconzoom/examples>`_.
+* `Ejemplo de uso que usa el sabor bundle y no requiere dependencias (Leaflet)
+  <https://sio2sio2.github.io/leaflet.iconzoom/examples/index.bundle.html>`_
+* `Ejemplo que usa la versión de depuración
+  <https://sio2sio2.github.io/leaflet.iconzoom/examples/index.debug.html>`
 
 .. _Leaflet: https://leafletjs.com
