@@ -1,4 +1,4 @@
-// import L from "leaflet";  // De terceros: mejor a traves de Provide
+L.Compatibility; // Para importar el plugin de compatibilidad
 
 L.Icon.prototype.zoom = function(factor) {
    factor = factor || this.options.factor;
@@ -20,4 +20,4 @@ L.Marker.addInitHook(function() {
    });
 });
 
-// export const foobar = "xxx";  // No hace falta 
+export default L.Icon

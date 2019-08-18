@@ -1,12 +1,13 @@
 {
   "name": "leaflet.iconzoom",
   "author": "José Miguel Sánchez Alés <sio2sio2+github@gmail.com>",
-  "version": "0.1.2",
-  "main": "dist/leaflet.iconzoom.js",
+  "version": "0.1.3",
+  "main": "dist/leaflet.iconzoom-src.js",
   "scripts": {
     "build": "webpack --env.output=min",
-    "bundle": "webpack --env.output=bundle",
-    "src": "webpack --env.output=src",
+    "build:bundle": "webpack --env.output=bundle",
+    "build:src": "webpack --env.output=src",
+    "build:debug": "webpack --env.output=srcdebug",
     "debug": "webpack-dev-server --env.output=debug"
   },
   "license": "MIT",
@@ -46,8 +47,11 @@
     "@babel/preset-env": "^7.5.5",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
+    "cssnano": "^4.1.10",
     "file-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.8.0",
+    "postcss": "^7.0.17",
+    "postcss-loader": "^3.0.0",
     "url-loader": "^2.1.0",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
@@ -56,6 +60,7 @@
   },
   "dependencies": {
     "core-js": "^3.1.4",
-    "leaflet": "^1.5.1"
+    "leaflet": "^1.5.1",
+    "leaflet-defaulticon-compatibility": "^0.1.1"
   }
 }

@@ -34,14 +34,23 @@ function confBabel(env) {
 function confBundle() {
    return {
       entry: {
-         [name]: ["leaflet/dist/leaflet.css"]
+         [name]: ["leaflet/dist/leaflet.css",
+                  "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"]
       },
       module: {
          rules: [
             {
-               test: /\.css$/,
+               test: /\.css$/i,
                use: [MiniCssExtractPlugin.loader,
-                     "css-loader"]
+                     "css-loader",
+                     {
+                        loader: "postcss-loader",
+                        options: {
+                           plugins: [
+                              require("cssnano")({preset: "default"})
+                           ]
+                        }
+                     }]
             },
             {
                test: /\.(png|jpe?g|gif|svg)$/i,
@@ -65,16 +74,13 @@ function confBundle() {
 function confNoDeps() {
    return {
       externals: {
-         leaflet: {
-            root: "L",
-            amd: "leaflet",
-            commonjs: "leaflet",
-            commonjs2: "leaflet"
-         }
+         leaflet: "L",
+         "leaflet-defaulticon-compatibility": "L.Compatibility",
       },
       output: {
          libraryTarget: "umd",
-         umdNamedDefine: false
+         umdNamedDefine: false,
+         libraryExport: "default"
       }
    }
 } 
@@ -92,8 +98,7 @@ function confDev(filename) {
    }
 }
 
-//Configuración adicional para depuración
-//(Se requiere copiar el ejemplo en el servidor)
+// Configuración adicional para depuración interactica.
 function confDebug() {
    return {
       devServer: {
@@ -106,15 +111,18 @@ function confDebug() {
 }
 
 module.exports = env => {
+   // Modo
    switch(env.output) {
       case "debug":
-      case "src":
-         mode = "development";
+      case "srcdebug":
+         env.mode = "development";
          break;
       default:
-         mode = "production";
+         env.mode = "production";
    }
 
+   // Nombre del resultado.
+   let filename;
    switch(env.output) {
       case "min":
       case "debug":
@@ -123,12 +131,16 @@ module.exports = env => {
       case "src":
          filename = "[name]-src.js";
          break
+      case "srcdebug":
+         filename = "[name]-debug.js";
+         break;
       default:
          filename = `[name].${env.output}.js`;
    }
 
+
    const common = {
-      mode: mode,
+      mode: env.mode,
       entry: {
          [name]: ["./src/index.js"]
       },
@@ -137,14 +149,16 @@ module.exports = env => {
       },
       plugins: [
          new webpack.ProvidePlugin({
-            L: "leaflet"
+            L: "leaflet",
+            "leaflet-defaulticon-compatibility": "L.Compatibility",
          })
       ]
    }
 
    return merge.smart(
       common,
-      mode === "production"?confBabel(env):confDev(filename),
+      env.mode === "production"?confBabel(env):confDev(filename),
+      env.output === "src"?{optimization: {minimize: false}}:null,
       env.output === "bundle"?confBundle():confNoDeps(),
       env.output === "debug"?confDebug():null
    )
