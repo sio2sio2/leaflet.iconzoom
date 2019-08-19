@@ -52,11 +52,6 @@ function confNoDeps() {
             amd: "leaflet"
          },
          "leaflet-defaulticon-compatibility": "L.Compatibility",
-      },
-      output: {
-         libraryTarget: "umd",
-         umdNamedDefine: false,
-         libraryExport: "default"
       }
    }
 } 
@@ -116,7 +111,10 @@ module.exports = env => {
          [name]: ["./src/plugin.js"]
       },
       output: {
-         filename: filename
+         filename: filename,
+         libraryTarget: "umd",
+         umdNamedDefine: false,
+         libraryExport: "default"
       },
       module: {
          rules: [
