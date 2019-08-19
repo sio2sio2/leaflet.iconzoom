@@ -74,7 +74,12 @@ function confBundle() {
 function confNoDeps() {
    return {
       externals: {
-         leaflet: "L",
+         leaflet: {
+            root: "L",
+            commonjs: "leaflet",
+            commonjs2: "leaflet",
+            amd: "leaflet"
+         },
          "leaflet-defaulticon-compatibility": "L.Compatibility",
       },
       output: {

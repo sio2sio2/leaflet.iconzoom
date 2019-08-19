@@ -1,10 +1,10 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("L"));
+		module.exports = factory(require("leaflet"));
 	else if(typeof define === 'function' && define.amd)
-		define(["L"], factory);
+		define(["leaflet"], factory);
 	else {
-		var a = typeof exports === 'object' ? factory(require("L")) : factory(root["L"]);
+		var a = typeof exports === 'object' ? factory(require("leaflet")) : factory(root["L"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
 })(window, function(__WEBPACK_EXTERNAL_MODULE_leaflet__) {
@@ -146,9 +146,9 @@ module.exports = __webpack_require__(/*! ./src/index.js */"./src/index.js");
 /***/ }),
 
 /***/ "leaflet":
-/*!********************!*\
-  !*** external "L" ***!
-  \********************/
+/*!****************************************************************************************!*\
+  !*** external {"root":"L","commonjs":"leaflet","commonjs2":"leaflet","amd":"leaflet"} ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
