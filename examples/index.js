@@ -41,7 +41,7 @@ window.onload = function() {
    const Watermark = L.Control.extend({
       onAdd: function(map) {
          const img = L.DomUtil.create("img");
-         img.src = "images/logo.svg"
+         img.src = "logo.svg"
          img.style.width = "200px";
 
          return img
