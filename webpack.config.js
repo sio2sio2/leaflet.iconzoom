@@ -36,13 +36,7 @@ function confBundle() {
       entry: {
          [name]: ["leaflet/dist/leaflet.css",
                   "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"]
-      },
-      plugins: [
-         new MiniCssExtractPlugin({
-            filename: "[name].bundle.css",
-            chunkFilename: "[id].css"
-         })
-      ]
+      }
    }
 }
 
@@ -151,6 +145,10 @@ module.exports = env => {
          new webpack.ProvidePlugin({
             L: "leaflet",
             "leaflet-defaulticon-compatibility": "L.Compatibility",
+         }),
+         new MiniCssExtractPlugin({
+            filename: "[name].bundle.css",
+            chunkFilename: "[id].css"
          })
       ]
    }
