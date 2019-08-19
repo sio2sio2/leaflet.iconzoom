@@ -37,29 +37,6 @@ function confBundle() {
          [name]: ["leaflet/dist/leaflet.css",
                   "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"]
       },
-      module: {
-         rules: [
-            {
-               test: /\.css$/i,
-               use: [MiniCssExtractPlugin.loader,
-                     "css-loader",
-                     {
-                        loader: "postcss-loader",
-                        options: {
-                           plugins: [
-                              require("cssnano")({preset: "default"})
-                           ]
-                        }
-                     }]
-            },
-            {
-               test: /\.(png|jpe?g|gif|svg)$/i,
-               use: [
-                  'url-loader?limit=4096&name=images/[name].[ext]'
-               ]
-            }
-         ]
-      },
       plugins: [
          new MiniCssExtractPlugin({
             filename: "[name].bundle.css",
@@ -99,13 +76,7 @@ function confDev(filename) {
          new webpack.SourceMapDevToolPlugin({
             filename: `${filename}.map`
          })
-      ]
-   }
-}
-
-// Configuración adicional para depuración interactica.
-function confDebug() {
-   return {
+      ],
       devServer: {
          contentBase: path.resolve(__dirname, "examples"),
          publicPath: "/dist/",
@@ -114,6 +85,7 @@ function confDebug() {
       }
    }
 }
+
 
 module.exports = env => {
    // Modo
@@ -147,10 +119,33 @@ module.exports = env => {
    const common = {
       mode: env.mode,
       entry: {
-         [name]: ["./src/index.js"]
+         [name]: ["./src/plugin.js"]
       },
       output: {
          filename: filename
+      },
+      module: {
+         rules: [
+            {
+               test: /\.css$/i,
+               use: [MiniCssExtractPlugin.loader,
+                     "css-loader",
+                     {
+                        loader: "postcss-loader",
+                        options: {
+                           plugins: [
+                              require("cssnano")({preset: "default"})
+                           ]
+                        }
+                     }]
+            },
+            {
+               test: /\.(png|jpe?g|gif|svg)$/i,
+               use: [
+                  'url-loader?limit=4096&name=images/[name].[ext]'
+               ]
+            }
+         ]
       },
       plugins: [
          new webpack.ProvidePlugin({
@@ -165,6 +160,5 @@ module.exports = env => {
       env.mode === "production"?confBabel(env):confDev(filename),
       env.output === "src"?{optimization: {minimize: false}}:null,
       env.output === "bundle"?confBundle():confNoDeps(),
-      env.output === "debug"?confDebug():null
    )
 }
