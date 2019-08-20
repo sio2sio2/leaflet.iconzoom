@@ -51,7 +51,12 @@ function confNoDeps() {
             commonjs2: "leaflet",
             amd: "leaflet"
          },
-         "leaflet-defaulticon-compatibility": "L.Compatibility",
+         "leaflet-defaulticon-compatibility": {
+            root: "compatibility",
+            commonjs: "leaflet-defaulticon-compatibility",
+            commonjs2: "leaflet-defaulticon-compatibility",
+            amd: "leaflet-defaulticon-compatibility",
+         }
       }
    }
 } 
@@ -142,7 +147,7 @@ module.exports = env => {
       plugins: [
          new webpack.ProvidePlugin({
             L: "leaflet",
-            "leaflet-defaulticon-compatibility": "L.Compatibility",
+            "compatibility": "leaflet-defaulticon-compatibility"
          }),
          new MiniCssExtractPlugin({
             filename: "[name].bundle.css",

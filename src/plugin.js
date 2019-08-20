@@ -1,4 +1,4 @@
-L.Compatibility; // Para importar el plugin de compatibilidad
+compatibility; // Para importar el plugin de compatibilidad
 
 L.Icon.prototype.zoom = function(factor) {
    factor = factor || this.options.factor;
