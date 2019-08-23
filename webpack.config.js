@@ -2,7 +2,8 @@ const webpack = require("webpack"),
       merge = require("webpack-merge"),
       path = require("path"),
       MiniCssExtractPlugin = require("mini-css-extract-plugin"),
-      name = require("./package.json").name;
+      pack = require("./package.json"),
+      name = pack.name;
 
 
 // Configuración para Babel
@@ -34,8 +35,7 @@ function confBabel(env) {
 function confBundle() {
    return {
       entry: {
-         [name]: ["leaflet/dist/leaflet.css",
-                  "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"]
+         [name]: ["leaflet/dist/leaflet.css"]
       }
    }
 }
@@ -50,12 +50,6 @@ function confNoDeps() {
             commonjs: "leaflet",
             commonjs2: "leaflet",
             amd: "leaflet"
-         },
-         "leaflet-defaulticon-compatibility": {
-            root: "compatibility",
-            commonjs: "leaflet-defaulticon-compatibility",
-            commonjs2: "leaflet-defaulticon-compatibility",
-            amd: "leaflet-defaulticon-compatibility",
          }
       }
    }
@@ -65,12 +59,7 @@ function confNoDeps() {
 // (los mapeos de código fuente en fichero aparte)
 function confDev(filename) {
    return {
-      devtool: false,
-      plugins: [
-         new webpack.SourceMapDevToolPlugin({
-            filename: `${filename}.map`
-         })
-      ],
+      devtool: "source-map",
       devServer: {
          contentBase: path.resolve(__dirname, "examples"),
          publicPath: "/dist/",
@@ -118,7 +107,8 @@ module.exports = env => {
       output: {
          filename: filename,
          libraryTarget: "umd",
-         umdNamedDefine: false,
+         umdNamedDefine: true,
+         library: ["L", "Icon"],
          libraryExport: "default"
       },
       module: {
@@ -146,8 +136,14 @@ module.exports = env => {
       },
       plugins: [
          new webpack.ProvidePlugin({
-            L: "leaflet",
-            "compatibility": "leaflet-defaulticon-compatibility"
+            L: "leaflet"
+         }),
+         new webpack.DefinePlugin({
+            "process.env": {
+               output: JSON.stringify(env.output),
+               version: JSON.stringify(pack.version),
+               mode: JSON.stringify(env.mode)
+            }
          }),
          new MiniCssExtractPlugin({
             filename: "[name].bundle.css",
@@ -157,9 +153,9 @@ module.exports = env => {
    }
 
    return merge.smart(
+      env.output === "bundle"?confBundle():confNoDeps(),
       common,
       env.mode === "production"?confBabel(env):confDev(filename),
       env.output === "src"?{optimization: {minimize: false}}:null,
-      env.output === "bundle"?confBundle():confNoDeps(),
    )
 }

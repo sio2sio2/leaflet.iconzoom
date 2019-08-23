@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("leaflet"), require("leaflet-defaulticon-compatibility"));
+		module.exports = factory(require("leaflet"));
 	else if(typeof define === 'function' && define.amd)
-		define(["leaflet", "leaflet-defaulticon-compatibility"], factory);
-	else {
-		var a = typeof exports === 'object' ? factory(require("leaflet"), require("leaflet-defaulticon-compatibility")) : factory(root["L"], root["compatibility"]);
-		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
-	}
-})(window, function(__WEBPACK_EXTERNAL_MODULE_leaflet__, __WEBPACK_EXTERNAL_MODULE_leaflet_defaulticon_compatibility__) {
+		define("Icon", ["leaflet"], factory);
+	else if(typeof exports === 'object')
+		exports["Icon"] = factory(require("leaflet"));
+	else
+		root["L"] = root["L"] || {}, root["L"]["Icon"] = factory(root["L"]);
+})(window, function(__WEBPACK_EXTERNAL_MODULE_leaflet__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -105,7 +105,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(compatibility, L) {compatibility; // Para importar el plugin de compatibilidad
+/* WEBPACK VAR INJECTION */(function(L) {if(false) {}
 
 L.Icon.prototype.zoom = function(factor) {
    factor = factor || this.options.factor;
@@ -129,7 +129,7 @@ L.Marker.addInitHook(function() {
 
 /* harmony default export */ __webpack_exports__["default"] = (L.Icon);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! leaflet-defaulticon-compatibility */ "leaflet-defaulticon-compatibility"), __webpack_require__(/*! leaflet */ "leaflet")))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! leaflet */ "leaflet")))
 
 /***/ }),
 
@@ -153,17 +153,6 @@ module.exports = __webpack_require__(/*! ./src/plugin.js */"./src/plugin.js");
 /***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_leaflet__;
-
-/***/ }),
-
-/***/ "leaflet-defaulticon-compatibility":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** external {"root":"compatibility","commonjs":"leaflet-defaulticon-compatibility","commonjs2":"leaflet-defaulticon-compatibility","amd":"leaflet-defaulticon-compatibility"} ***!
-  \**********************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_leaflet_defaulticon_compatibility__;
 
 /***/ })
 

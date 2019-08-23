@@ -1,4 +1,7 @@
-compatibility; // Para importar el plugin de compatibilidad
+if(process.env.output === "bundle") {
+   require("leaflet-defaulticon-compatibility");
+   require("leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css");
+}
 
 L.Icon.prototype.zoom = function(factor) {
    factor = factor || this.options.factor;
